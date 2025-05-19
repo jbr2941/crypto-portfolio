@@ -1,19 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Crypto Portfolio Tracker</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
-<!-- Modal Structure -->
-<div id="projectModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn">&times;</span>
-    <div id="modalBody"></div>
-  </div>
-</div>
-
-  <body>
+<body>
   <header>
     <h1>My Crypto Portfolio</h1>
   </header>
@@ -37,6 +30,14 @@
     <div class="column" id="dead"><h2>Dead</h2></div>
     <div class="column" id="exited"><h2>Exited</h2></div>
   </main>
+
+  <!-- Modal -->
+  <div id="projectModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <div id="modalBody"></div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
