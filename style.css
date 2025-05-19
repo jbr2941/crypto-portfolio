@@ -1,77 +1,35 @@
-body {
-  font-family: sans-serif;
-  margin: 0;
-  background: #f4f4f4;
+.project-card {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
 }
 
-header {
-  background: #222;
-  color: white;
-  padding: 1rem;
+.project-card h3 {
+  margin: 0;
+}
+
+.project-card p {
+  margin: 5px 0;
+}
+
+.project-card button {
+  margin-top: 10px;
+}
+
+.vesting-schedule {
+  margin-top: 10px;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.vesting-schedule th, .vesting-schedule td {
+  border: 1px solid #ddd;
+  padding: 8px;
   text-align: center;
 }
 
-#newProjectForm {
-  background: #fff;
-  padding: 1rem;
-  margin: 1rem;
-  border-radius: 8px;
-}
-
-#projectForm {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 1rem;
-}
-
-.portfolio {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  margin: 1rem;
-}
-
-.column {
-  background: #fff;
-  padding: 1rem;
-  width: 22%;
-  border-radius: 8px;
-  min-height: 400px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-.card {
-  background: #e3f2fd;
-  margin: 1rem 0;
-  padding: 1rem;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.card:hover {
-  background: #bbdefb;
-}
-
-.card-header {
-  font-weight: bold;
-}
-
-.card-footer {
-  font-size: 0.9em;
-  color: #555;
-}
-
-/* Expandable details */
-.card-details {
-  display: none;
-  margin-top: 10px;
-  font-size: 0.9em;
-  background: #f9f9f9;
-  padding: 10px;
-  border-radius: 4px;
-}
-
-.card.expanded .card-details {
-  display: block;
+.vesting-schedule th {
+  background-color: #f4f4f4;
 }
