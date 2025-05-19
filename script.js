@@ -102,3 +102,55 @@ function renderUnlockScheduleChart(unlockSchedule) {
 
 // Initial load
 fetchPriceData();
+document.getElementById('projectForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('projectName').value;
+  const token = document.getElementById('tokenSymbol').value;
+  const category = document.getElementById('category').value.toLowerCase();
+  const website = document.getElementById('website').value;
+  const valuation = Number(document.getElementById('valuation').value);
+  const capital = Number(document.getElementById('capital').value);
+
+  const newProject = {
+    id: name.toLowerCase().replace(/\s+/g, '-'),
+    name: name,
+    category: category,
+    amount: 0,
+    token: token,
+    website: website,
+    twitter: "",
+    discord: "",
+    valuation: valuation,
+    capital: capital,
+    tgeDate: "",
+    vestingStart: "",
+    vestingEnd: "",
+    description: "",
+    totalTokens: 0,
+    legalDoc: "",
+    unlockSchedule: []
+  };
+
+  addCardToPage(newProject); // function to create and insert card
+  document.getElementById('projectForm').reset();
+});
+
+function addCardToPage(project) {
+  const categoryDiv = document.getElementById(project.category);
+  if (!categoryDiv) {
+    alert("Invalid category. Use invested, postTGE, dead, or exited.");
+    return;
+  }
+
+  const card = document.createElement('div');
+  card.classList.add('card');
+  card.onclick = () => showModal(project);
+
+  card.innerHTML = `
+      <div class="card-header">${project.name}</div>
+      <div class="card-body">Token: ${project.token}</div>
+      <div class="card-footer">Valuation: $${project.valuation}</div>
+  `;
+  categoryDiv.appendChild(card);
+}
