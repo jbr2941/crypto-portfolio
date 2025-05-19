@@ -13,14 +13,14 @@ const projects = [
     tgeDate: "2021-01-01",
     vestingStart: "",
     vestingEnd: "",
-    description: "",
+    description: "The first cryptocurrency.",
     totalTokens: 21000000,
     legalDoc: "",
     unlockSchedule: []
   }
 ];
 
-  function showModal(project) {
+function showModal(project) {
   const modal = document.getElementById("projectModal");
   const modalBody = document.getElementById("modalBody");
 
@@ -32,24 +32,11 @@ const projects = [
     <p><strong>Website:</strong> <a href="${project.website}" target="_blank">${project.website}</a></p>
     <p><strong>TGE Date:</strong> ${project.tgeDate}</p>
     <p><strong>Description:</strong> ${project.description}</p>
-    <p><strong>Tokens:</strong> ${project.totalTokens}</p>
+    <p><strong>Total Tokens:</strong> ${project.totalTokens}</p>
   `;
 
   modal.style.display = "block";
 }
-
-// Modal close handler
-document.querySelector(".close-btn").onclick = function () {
-  document.getElementById("projectModal").style.display = "none";
-};
-
-window.onclick = function (event) {
-  const modal = document.getElementById("projectModal");
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-};
-
 
 function createCard(project) {
   const column = document.getElementById(project.category);
@@ -68,9 +55,10 @@ function createCard(project) {
   column.appendChild(card);
 }
 
+// Load initial projects
 projects.forEach(createCard);
 
-// Add new project from form
+// Handle new project form submission
 document.getElementById('projectForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -104,3 +92,15 @@ document.getElementById('projectForm').addEventListener('submit', function (e) {
   createCard(newProject);
   document.getElementById('projectForm').reset();
 });
+
+// Modal close logic
+document.querySelector(".close-btn").onclick = function () {
+  document.getElementById("projectModal").style.display = "none";
+};
+
+window.onclick = function (event) {
+  const modal = document.getElementById("projectModal");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
