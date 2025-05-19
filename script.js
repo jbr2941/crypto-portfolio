@@ -20,45 +20,39 @@ const projects = [
   }
 ];
 
-function showModal(project) {
-  const modal = document.getElementById("projectModal");
-  const modalBody = document.getElementById("modalBody");
-
-  modalBody.innerHTML = `
-    <h2>${project.name} (${project.token})</h2>
-    <p><strong>Category:</strong> ${project.category}</p>
-    <p><strong>Valuation:</strong> $${project.valuation}</p>
-    <p><strong>Capital:</strong> $${project.capital}</p>
-    <p><strong>Website:</strong> <a href="${project.website}" target="_blank">${project.website}</a></p>
-    <p><strong>TGE Date:</strong> ${project.tgeDate}</p>
-    <p><strong>Description:</strong> ${project.description}</p>
-    <p><strong>Total Tokens:</strong> ${project.totalTokens}</p>
-  `;
-
-  modal.style.display = "block";
-}
-
 function createCard(project) {
   const column = document.getElementById(project.category);
   if (!column) return;
 
   const card = document.createElement("div");
   card.className = "card";
-  card.onclick = () => showModal(project);
 
   card.innerHTML = `
     <div class="card-header">${project.name}</div>
     <div class="card-body">Token: ${project.token}</div>
     <div class="card-footer">Valuation: $${project.valuation}</div>
+    <div class="card-details">
+      <p><strong>Category:</strong> ${project.category}</p>
+      <p><strong>Capital:</strong> $${project.capital}</p>
+      <p><strong>Website:</strong> <a href="${project.website}" target="_blank">${project.website}</a></p>
+      <p><strong>TGE Date:</strong> ${project.tgeDate}</p>
+      <p><strong>Description:</strong> ${project.description}</p>
+      <p><strong>Total Tokens:</strong> ${project.totalTokens}</p>
+    </div>
   `;
+
+  // Toggle expand/collapse
+  card.addEventListener("click", () => {
+    card.classList.toggle("expanded");
+  });
 
   column.appendChild(card);
 }
 
-// Load initial projects
+// Load initial cards
 projects.forEach(createCard);
 
-// Handle new project form submission
+// Form submission to add new projects
 document.getElementById('projectForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
@@ -92,15 +86,3 @@ document.getElementById('projectForm').addEventListener('submit', function (e) {
   createCard(newProject);
   document.getElementById('projectForm').reset();
 });
-
-// Modal close logic
-document.querySelector(".close-btn").onclick = function () {
-  document.getElementById("projectModal").style.display = "none";
-};
-
-window.onclick = function (event) {
-  const modal = document.getElementById("projectModal");
-  if (event.target === modal) {
-    modal.style.display = "none";
-  }
-};
