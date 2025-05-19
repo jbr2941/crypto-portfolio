@@ -17,14 +17,16 @@
       <input type="text" placeholder="Project Name" id="projectName" required />
       <input type="text" placeholder="Token Symbol (e.g., BTC)" id="tokenSymbol" required />
       <input type="url" placeholder="Project Website" id="website" />
+      
+      <!-- Dropdown for Category -->
       <select id="category" required>
-  <option value="">Select Category</option>
-  <option value="invested">Invested</option>
-  <option value="postTGE">Post TGE</option>
-  <option value="dead">Dead</option>
-  <option value="exited">Exited</option>
-</select>
-
+        <option value="">Select Category</option>
+        <option value="invested">Invested</option>
+        <option value="postTGE">Post TGE</option>
+        <option value="dead">Dead</option>
+        <option value="exited">Exited</option>
+      </select>
+      
       <input type="number" placeholder="Investment Amount (USD)" id="capital" />
       <input type="number" placeholder="Token Valuation (USD)" id="valuation" />
       <button type="submit">Add Project</button>
