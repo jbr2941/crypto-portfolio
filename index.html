@@ -24,4 +24,23 @@
         <option value="invested">Invested</option>
         <option value="postTGE">Post TGE</option>
         <option value="dead">Dead</option>
-        <option value="
+        <option value="exited">Exited</option>
+      </select>
+      
+      <input type="number" placeholder="Investment Amount (USD)" id="capital" />
+      <input type="number" placeholder="Token Valuation (USD)" id="valuation" />
+      <button type="submit">Add Project</button>
+    </form>
+    <button id="saveButton">Save Portfolio</button> <!-- Save Button -->
+  </section>
+
+  <main class="portfolio">
+    <div class="column" id="invested"><h2>Invested</h2></div>
+    <div class="column" id="postTGE"><h2>Post TGE</h2></div>
+    <div class="column" id="dead"><h2>Dead</h2></div>
+    <div class="column" id="exited"><h2>Exited</h2></div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
