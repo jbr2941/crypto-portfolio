@@ -1,46 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Crypto Portfolio Tracker</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header>
-    <h1>My Crypto Portfolio</h1>
-  </header>
+<form id="projectForm">
+  <input type="text" id="projectName" placeholder="Project Name" />
+  <input type="number" id="equityValuation" placeholder="Equity Valuation (USD)" />
+  <input type="number" id="tokenValuation" placeholder="Token Valuation (USD)" />
+  <input type="number" id="capital" placeholder="Investment Capital (USD)" />
+  <input type="date" id="tgeDate" placeholder="TGE Date" />
+  <input type="date" id="vestingStart" placeholder="Vesting Start" />
+  <input type="date" id="vestingEnd" placeholder="Vesting End" />
+  <textarea id="description" placeholder="Description"></textarea>
+  <input type="date" id="signDate" placeholder="Sign Date" />
+  <input type="date" id="transactionDate" placeholder="Transaction Date" />
+  <input type="text" id="transaction" placeholder="Transaction" />
+  <input type="number" id="totalTokens" placeholder="Total Tokens" />
+  <input type="text" id="legalDoc" placeholder="Legal Doc" />
+  <input type="number" id="fund" placeholder="Fund" />
+  <select id="category">
+    <option value="">Select Category</option>
+    <option value="invested">Invested</option>
+    <option value="postTGE">Post TGE</option>
+    <option value="dead">Dead</option>
+    <option value="exited">Exited</option>
+  </select>
+  <button type="submit">Add Project</button>
+  <button type="button" id="cancelFormBtn">Cancel</button>
+</form>
 
-  <section id="newProjectForm">
-    <h2>Add New Project</h2>
-    <form id="projectForm">
-      <input type="text" placeholder="Project Name" id="projectName" required />
-      <input type="text" placeholder="Token Symbol (e.g., BTC)" id="tokenSymbol" required />
-      <input type="url" placeholder="Project Website" id="website" />
-      
-      <!-- Dropdown for Category -->
-      <select id="category" required>
-        <option value="">Select Category</option>
-        <option value="invested">Invested</option>
-        <option value="postTGE">Post TGE</option>
-        <option value="dead">Dead</option>
-        <option value="exited">Exited</option>
-      </select>
-      
-      <input type="number" placeholder="Investment Amount (USD)" id="capital" />
-      <input type="number" placeholder="Token Valuation (USD)" id="valuation" />
-      <button type="submit">Add Project</button>
-    </form>
-    <button id="saveButton">Save Portfolio</button> <!-- Save Button -->
-  </section>
-
-  <main class="portfolio">
-    <div class="column" id="invested"><h2>Invested</h2></div>
-    <div class="column" id="postTGE"><h2>Post TGE</h2></div>
-    <div class="column" id="dead"><h2>Dead</h2></div>
-    <div class="column" id="exited"><h2>Exited</h2></div>
-  </main>
-
-  <script src="script.js"></script>
-</body>
-</html>
+<div id="projectCards"></div>
