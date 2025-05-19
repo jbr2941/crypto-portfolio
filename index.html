@@ -1,27 +1,68 @@
-<form id="projectForm">
-  <input type="text" id="projectName" placeholder="Project Name" />
-  <input type="number" id="equityValuation" placeholder="Equity Valuation (USD)" />
-  <input type="number" id="tokenValuation" placeholder="Token Valuation (USD)" />
-  <input type="number" id="capital" placeholder="Investment Capital (USD)" />
-  <input type="date" id="tgeDate" placeholder="TGE Date" />
-  <input type="date" id="vestingStart" placeholder="Vesting Start" />
-  <input type="date" id="vestingEnd" placeholder="Vesting End" />
-  <textarea id="description" placeholder="Description"></textarea>
-  <input type="date" id="signDate" placeholder="Sign Date" />
-  <input type="date" id="transactionDate" placeholder="Transaction Date" />
-  <input type="text" id="transaction" placeholder="Transaction" />
-  <input type="number" id="totalTokens" placeholder="Total Tokens" />
-  <input type="text" id="legalDoc" placeholder="Legal Doc" />
-  <input type="number" id="fund" placeholder="Fund" />
-  <select id="category">
-    <option value="">Select Category</option>
-    <option value="invested">Invested</option>
-    <option value="postTGE">Post TGE</option>
-    <option value="dead">Dead</option>
-    <option value="exited">Exited</option>
-  </select>
-  <button type="submit">Add Project</button>
-  <button type="button" id="cancelFormBtn">Cancel</button>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Crypto Portfolio Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>My Crypto Portfolio</h1>
+  </header>
 
-<div id="projectCards"></div>
+  <!-- Add New Project Form (Hidden by default) -->
+  <div id="projectFormContainer" class="hidden">
+    <h2>Add New Project</h2>
+    <form id="projectForm">
+      <input type="text" placeholder="Project Name" id="projectName" required />
+      <input type="number" placeholder="Equity Valuation (USD)" id="equityValuation" required />
+      <input type="number" placeholder="Token Valuation (USD)" id="tokenValuation" required />
+      <input type="number" placeholder="Investment Capital (USD)" id="capital" required />
+      <input type="date" placeholder="TGE Date" id="tgeDate" required />
+      <input type="date" placeholder="Vesting Start" id="vestingStart" required />
+      <input type="date" placeholder="Vesting End" id="vestingEnd" required />
+      <textarea placeholder="Description" id="description"></textarea>
+      <input type="date" placeholder="Sign Date" id="signDate" required />
+      <input type="date" placeholder="Transaction Date" id="transactionDate" required />
+      <input type="text" placeholder="Transaction" id="transaction" required />
+      <input type="number" placeholder="Total Tokens" id="totalTokens" required />
+      <input type="text" placeholder="Legal Doc" id="legalDoc" />
+      <input type="number" placeholder="Fund" id="fund" required />
+      
+      <select id="category" required>
+        <option value="">Select Category</option>
+        <option value="invested">Invested</option>
+        <option value="postTGE">Post TGE</option>
+        <option value="dead">Dead</option>
+        <option value="exited">Exited</option>
+      </select>
+      
+      <button type="submit">Add Project</button>
+      <button type="button" id="cancelFormBtn">Cancel</button> <!-- Cancel Button -->
+    </form>
+  </div>
+
+  <!-- Portfolio Categories -->
+  <main class="portfolio">
+    <div class="column" id="invested">
+      <h2>Invested</h2>
+      <button class="plusBtn" id="addInvestedBtn">+</button>
+    </div>
+    <div class="column" id="postTGE">
+      <h2>Post TGE</h2>
+      <button class="plusBtn" id="addPostTGEBtn">+</button>
+    </div>
+    <div class="column" id="dead">
+      <h2>Dead</h2>
+      <button class="plusBtn" id="addDeadBtn">+</button>
+    </div>
+    <div class="column" id="exited">
+      <h2>Exited</h2>
+      <button class="plusBtn" id="addExitedBtn">+</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
