@@ -20,7 +20,6 @@ const projects = [
   }
 ];
 
-function showModal(project) {
   function showModal(project) {
   const modal = document.getElementById("projectModal");
   const modalBody = document.getElementById("modalBody");
