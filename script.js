@@ -1,88 +1,85 @@
-const projects = [
-  {
-    id: "bitcoin",
-    name: "Bitcoin",
-    category: "invested",
-    amount: 1,
-    token: "BTC",
-    website: "https://bitcoin.org",
-    twitter: "",
-    discord: "",
-    valuation: 50000,
-    capital: 50000,
-    tgeDate: "2021-01-01",
-    vestingStart: "",
-    vestingEnd: "",
-    description: "The first cryptocurrency.",
-    totalTokens: 21000000,
-    legalDoc: "",
-    unlockSchedule: []
-  }
-];
-
-function createCard(project) {
-  const column = document.getElementById(project.category);
-  if (!column) return;
-
-  const card = document.createElement("div");
-  card.className = "card";
-
-  card.innerHTML = `
-    <div class="card-header">${project.name}</div>
-    <div class="card-body">Token: ${project.token}</div>
-    <div class="card-footer">Valuation: $${project.valuation}</div>
-    <div class="card-details">
-      <p><strong>Category:</strong> ${project.category}</p>
-      <p><strong>Capital:</strong> $${project.capital}</p>
-      <p><strong>Website:</strong> <a href="${project.website}" target="_blank">${project.website}</a></p>
-      <p><strong>TGE Date:</strong> ${project.tgeDate}</p>
-      <p><strong>Description:</strong> ${project.description}</p>
-      <p><strong>Total Tokens:</strong> ${project.totalTokens}</p>
-    </div>
-  `;
-
-  // Toggle expand/collapse
-  card.addEventListener("click", () => {
-    card.classList.toggle("expanded");
-  });
-
-  column.appendChild(card);
-}
-
-// Load initial cards
-projects.forEach(createCard);
-
-// Form submission to add new projects
-document.getElementById('projectForm').addEventListener('submit', function (e) {
+document.getElementById('projectForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
-  const name = document.getElementById('projectName').value;
-  const token = document.getElementById('tokenSymbol').value;
-  const category = document.getElementById('category').value.toLowerCase();
-  const website = document.getElementById('website').value;
-  const valuation = Number(document.getElementById('valuation').value);
-  const capital = Number(document.getElementById('capital').value);
-
-  const newProject = {
-    id: name.toLowerCase().replace(/\s+/g, '-'),
-    name,
-    category,
-    amount: 0,
-    token,
-    website,
-    twitter: "",
-    discord: "",
-    valuation,
-    capital,
-    tgeDate: "",
-    vestingStart: "",
-    vestingEnd: "",
-    description: "",
-    totalTokens: 0,
-    legalDoc: "",
-    unlockSchedule: []
+  const project = {
+    id: Date.now(),
+    name: document.getElementById('projectName').value,
+    category: document.getElementById('category').value,
+    vestingStart: document.getElementById('vestingStart').value,
+    vestingEnd: document.getElementById('vestingEnd').value,
+    // Add other fields as necessary
   };
 
-  createCard(newProject);
-  document.getElementById('projectForm').reset();
+  // Create project card
+  const card = document.createElement('div');
+  card.classList.add('project-card');
+  card.id = project.id;
+  card.innerHTML = `
+    <h3>${project.name}</h3>
+    <p>Category: ${project.category}</p>
+    <button class="viewVestingBtn">View Vesting Schedule</button>
+    <div class="vesting-schedule" style="display: none;"></div>
+  `;
+  document.getElementById('projectCards').appendChild(card);
+
+  // Add event listener to toggle vesting schedule
+  card.querySelector('.viewVestingBtn').addEventListener('click', function() {
+    const vestingDiv = card.querySelector('.vesting-schedule');
+    if (vestingDiv.style.display === 'none') {
+      vestingDiv.style.display = 'block';
+      generateVestingSchedule(project, vestingDiv);
+    } else {
+      vestingDiv.style.display = 'none';
+    }
+  });
+
+  // Fetch token price
+  fetchTokenPrice('ethereum', card);
 });
+
+function generateVestingSchedule(project, container) {
+  const schedule = calculateVestingSchedule(project.vestingStart, project.vestingEnd);
+  const table = document.createElement('table');
+  table.innerHTML = `
+    <thead>
+      <tr><th>Month</th><th>Year</th></tr>
+    </thead>
+    <tbody>
+      ${schedule.map(entry => `
+        <tr>
+          <td>${entry.month}</td>
+          <td>${entry.year}</td>
+        </tr>
+      `).join('')}
+    </tbody>
+  `;
+  container.appendChild(table);
+}
+
+function calculateVestingSchedule(startDate, endDate) {
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const schedule = [];
+
+  while (start <= end) {
+    schedule.push({
+      month: start.toLocaleString('default', { month: 'long' }),
+      year: start.getFullYear(),
+    });
+    start.setMonth(start.getMonth() + 1);
+  }
+
+  return schedule;
+}
+
+function fetchTokenPrice(tokenId, card) {
+  fetch(`https://api.coingecko.com/api/v3/simple/price?ids=${tokenId}&vs_currencies=usd`)
+    .then(response => response.json())
+    .then(data => {
+      const price = data[tokenId]?.usd;
+      const priceDiv = document.createElement('div');
+      priceDiv.textContent = `Current Price: $${price}`;
+      card.appendChild(priceDiv);
+    })
+    .catch(error => console.error('Error fetching price:', error));
+}
