@@ -62,6 +62,7 @@ header {
   color: #555;
 }
 
+/* Modal Styles */
 .modal {
   display: none;
   position: fixed;
