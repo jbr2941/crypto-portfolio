@@ -10,7 +10,19 @@
     <header>
         <h1>Crypto Portfolio Tracker</h1>
     </header>
-    
+    <section id="newProjectForm">
+  <h2>Add New Project</h2>
+  <form id="projectForm">
+    <input type="text" placeholder="Project Name" id="projectName" required />
+    <input type="text" placeholder="Token Symbol (e.g., BTC)" id="tokenSymbol" required />
+    <input type="url" placeholder="Project Website" id="website" />
+    <input type="text" placeholder="Category (invested, postTGE, dead, exited)" id="category" required />
+    <input type="number" placeholder="Investment Amount (USD)" id="capital" />
+    <input type="number" placeholder="Token Valuation (USD)" id="valuation" />
+    <button type="submit">Add Project</button>
+  </form>
+</section>
+
     <main>
         <!-- Summary Overview -->
         <section id="summary">
